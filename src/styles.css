@@ -196,6 +196,27 @@ h1 {
   border: 0;
 }
 
+.reset-game {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 3px;
+  background: rgb(0, 0, 255, 0.7);
+}
+
+.keyboard {
+  display: flex;
+  justify-content: center;
+}
+
+.key {
+  background: var(--color-gray-700);
+  border-radius: 3px;
+  padding: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: -1.8rem;
+}
+
 /*
   Modal styles
 
