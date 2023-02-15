@@ -1,27 +1,38 @@
 import React from "react";
 
-import { checkGuess } from "../../game-helpers";
-
-let keys = [
+let ROWS = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
   ["Z", "X", "C", "V", "B", "N", "M"],
 ];
 
-function Keyboard({ answer, guessList }) {
-  // let result = checkGuess()
+function getLettersStatus(validateGuesses) {
+  let lettersStatus = {};
+
+  validateGuesses.forEach((guess) => {
+    guess.forEach(({ letter, status }) => {
+      lettersStatus[letter] = status;
+    });
+  });
+
+  return lettersStatus;
+}
+
+function Keyboard({ validateGuesses }) {
+  let lettersStatus = getLettersStatus(validateGuesses);
+
   return (
-    <>
-      {keys.map((key, index) => (
-        <div key={index} className="keyboard">
-          {key.map((letter, index) => (
-            <span key={index} className="key">
+    <div className="keyboard">
+      {ROWS.map((row, index) => (
+        <div key={index} className="keyboard-row">
+          {row.map((letter) => (
+            <span key={letter} className={`letter ${lettersStatus[letter]}`}>
               {letter}
             </span>
           ))}
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

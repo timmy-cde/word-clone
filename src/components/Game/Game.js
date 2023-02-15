@@ -9,6 +9,7 @@ import GuessList from "../GuessList/GuessList";
 import WonBanner from "../WonBanner/WonBanner";
 import LostBanner from "../LostBanner/LostBanner";
 import Keyboard from "../Keyboard/Keyboard";
+import { checkGuess } from "../../game-helpers";
 
 function Game() {
   const [answer, setAnswer] = React.useState(() => sample(WORDS));
@@ -27,17 +28,18 @@ function Game() {
     }
   }
 
+  const validateGuesses = guessList.map((guess) => checkGuess(guess, answer));
+
   function handleReset() {
-    setGuessList([]);
     const nextAnswer = sample(WORDS);
     setAnswer(nextAnswer);
     setGameStatus("running");
-    console.info({ nextAnswer });
+    setGuessList([]);
   }
 
   return (
     <>
-      <GuessList guessList={guessList} answer={answer} />
+      <GuessList validateGuesses={validateGuesses} />
       <GuessForm
         handleSubmitGuess={handleSubmitGuess}
         gameStatus={gameStatus}
@@ -52,7 +54,7 @@ function Game() {
       {gameStatus === "lost" && (
         <LostBanner answer={answer} handleReset={handleReset} />
       )}
-      <Keyboard answer={answer} guessList={guessList} />
+      <Keyboard validateGuesses={validateGuesses} />
     </>
   );
 }

@@ -231,7 +231,6 @@ h1 {
   }
 }
 
-
 /* 
   Stretch goals styles
 */
@@ -245,14 +244,36 @@ h1 {
 
 .keyboard {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.key {
-  background: var(--color-gray-700);
-  border-radius: 3px;
-  padding: 5px;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-bottom: -1.8rem;
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.keyboard .letter {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 4px;
+  display: grid;
+  place-content: center;
+  background: var(--color-gray-900);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.keyboard .letter.correct {
+  background: var(--color-success);
+  color: white;
+}
+.keyboard .letter.incorrect {
+  background: var(--color-gray-300);
+  color: white;
+}
+.keyboard .letter.misplaced {
+  background: var(--color-warning);
+  color: white;
 }
